@@ -86,7 +86,16 @@ $(document).ready(function (){
         console.log(data);
         if (data.username) {
           var welecome = '<h2>Welcome  ' + data.username + '</h2>'
-          var logout = '<a href="#" id="logout-button" >logout</a>'
+          var logout = '<a href="#" id="logout-button" onclick="  function (){
+              '    $.ajax({\n' +
+              '      url: \'/logout\',\n' +
+              '      type: "POST",\n' +
+              '      contentType: "application/json",\n' +
+              '      data: JSON.stringify({}),\n' +
+              '      success: function(data){\n' +
+              '        console.log("yes");\n' +
+              '      }\n' +
+              '    })">logout</a>'
           $("#login").html(welecome)
           $("#button-group").html(logout)
         }
@@ -98,18 +107,6 @@ $(document).ready(function (){
     });
    });
 
-    $("#button-group").click(function (){
-
-    $.ajax({
-      url: '/logout',
-      type: "POST",
-      contentType: "application/json",
-      data: JSON.stringify({}),
-      success: function(data){
-        console.log("yes");
-      }
-    })
-   });
 
 });
 
