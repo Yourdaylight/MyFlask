@@ -8,6 +8,7 @@ $(document).ready(function (){
         result:JSON.stringify({"name":name}),
         success: function(result){
           console.log("yes");
+          console.log(name)
           alert("Getting infomation from the user");}
         });
 
@@ -56,27 +57,59 @@ $(document).ready(function (){
 
   $("#submit-button").click(function (){
 
-    var message = $("#message").val();
-    var username=$("#username").val();
-    alert(username);
-    var password=$("#password").val();
     $.ajax({
       url: '/user',
       type: "POST",
       contentType: "application/json",
-      data: JSON.stringify({"username":$("#username").val()}),
-      success: function(result){
+      data: JSON.stringify({"username":$("#user").val(),"password":$("#passwd").val()}),
+      success: function(data){
         console.log("yes");
-        console.log(result);
-        alert("success!");}
+        console.log(data);
+        var LOGOUT="<h2>Welcome  "+data.username+ "</h2>"+"<a href=\"#\" id=\"put-button\" class=\"btn btn-lg btn-info\">logout</a>"
+        $("#login").html(LOGOUT)
+      }
 
     }).done(function(data){
       console.log(data);
     });
-
-
    });
 
+    $("#submit-button").click(function (){
+
+    $.ajax({
+      url: '/user',
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({"username":$("#user").val(),"password":$("#passwd").val()}),
+      success: function(data){
+        console.log("yes");
+        console.log(data);
+        if (data.username) {
+          var welecome = '<h2>Welcome  ' + data.username + '</h2>'
+          var logout = '<a href="#" id="logout-button" >logout</a>'
+          $("#login").html(welecome)
+          $("#button-group").html(logout)
+        }
+
+      }
+
+    }).done(function(data){
+      console.log(data);
+    });
+   });
+
+    $("#button-group").click(function (){
+
+    $.ajax({
+      url: '/logout',
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({}),
+      success: function(data){
+        console.log("yes");
+      }
+    })
+   });
 
 });
 

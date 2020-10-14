@@ -17,6 +17,10 @@
 		<link href="/css/cover.css" rel="stylesheet">
 		<link href="/css/clippy.css" rel="stylesheet" type="text/css" media="all">
 		<link href="/css/custom.css" rel="stylesheet">
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+
+		<script src="/js/init.js"></script>
 	</head>
 
 	<body>
@@ -29,35 +33,32 @@
 					<div class="inner cover">
 						<h1 class="cover-heading">CIS*3210 Lab 1</h1>
 
-            <form class="form-login" role="form">
-            <input type="text" name="username" class="textbox" id="user"  placeholder="username" />
+            <form id="login" class="form-login" role="form">
+            <input type="text" name="username" class="textbox" id="user" placeholder="username" />
 						<br>
 						<input type="password" name="password" class="textbox"  id="passwd" placeholder="password" />
-		        <br>
-						<br>
-            <input type="button" value="submit" id="submit-button" />
+		        		<br>
+
+						<input type="button" value="submit" id="submit-button" />
 					</form>
 
             <br>
-
+			<div id="button-group">
             <a href="#" id="get-button" class="btn btn-lg btn-info">Get</a>
 
             <a href="#" id="post-button" class="btn btn-lg btn-info">Post</a>
 
-						<a href="#" id="put-button" class="btn btn-lg btn-info">Put</a>
+				<a href="#" id="put-button" class="btn btn-lg btn-info">Put</a>
 
-						<a href="#" id="delete-button" class="btn btn-lg btn-info">Delete</a>
-
+				<a href="#" id="delete-button" class="btn btn-lg btn-info">Delete</a>
+	       </div>
 					</div>
 				</div>
 			</div>
 		</div>
 
 
-		<script src="/js/jquery.min.js"></script>
-		<script src="/js/bootstrap.min.js"></script>
 
-		<script src="/js/init.js"></script>
 
 
 
