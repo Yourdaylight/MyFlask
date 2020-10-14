@@ -10,16 +10,12 @@ app = Flask(__name__, static_url_path='')
 app.secret_key = '123456'
 
 def get_db():
-    # db = MySQLdb.connect(
-    # host = "dursley.socs.uoguelph.ca",
-    # user="yhuang20",
-    # passwd="1008239",
-    # db="yhuang20")
     db = MySQLdb.connect(
-    host = "47.97.197.244",
-    user="root",
-    passwd="LZHlzh.root123",
+    host = "dursley.socs.uoguelph.ca",
+    user="yhuang20",
+    passwd="1008239",
     db="yhuang20")
+
     return db
 
 def querry(sql):
