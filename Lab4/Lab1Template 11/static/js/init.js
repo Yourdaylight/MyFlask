@@ -55,24 +55,7 @@ $(document).ready(function (){
      });
   });
 
-  $("#submit-button").click(function (){
 
-    $.ajax({
-      url: '/user',
-      type: "POST",
-      contentType: "application/json",
-      data: JSON.stringify({"username":$("#user").val(),"password":$("#passwd").val()}),
-      success: function(data){
-        console.log("yes");
-        console.log(data);
-        var LOGOUT="<h2>Welcome  "+data.username+ "</h2>"+"<a href=\"#\" id=\"put-button\" class=\"btn btn-lg btn-info\">logout</a>"
-        $("#login").html(LOGOUT)
-      }
-
-    }).done(function(data){
-      console.log(data);
-    });
-   });
 
     $("#submit-button").click(function (){
 
@@ -84,22 +67,39 @@ $(document).ready(function (){
       success: function(data){
         console.log("yes");
         console.log(data);
-        if (data.username) {
+        if (data.msg==0) {
           var welecome = '<h2>Welcome  ' + data.username + '</h2>'
-          var logout = '<a href="#" id="logout-button" onclick="  function (){
-              '    $.ajax({\n' +
-              '      url: \'/logout\',\n' +
-              '      type: "POST",\n' +
-              '      contentType: "application/json",\n' +
-              '      data: JSON.stringify({}),\n' +
-              '      success: function(data){\n' +
-              '        console.log("yes");\n' +
-              '      }\n' +
-              '    })">logout</a>'
-          $("#login").html(welecome)
-          $("#button-group").html(logout)
+          $("#welcome").html(welecome)
+          $("#login").hide()
+          $("#logout-button").toggle()
+        }
+        else{
+            console.log("666")
+            alert("InputError:please check your username or password!")
+            $("#user").val("")
+            $("#passwd").val("")
         }
 
+      }
+
+    }).done(function(data){
+      console.log(data);
+    });
+   });
+
+    $("#logout-button").click(function (){
+
+    $.ajax({
+      url: '/logout',
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({}),
+      success: function(data){
+          $("#welcome").html("")
+          $("#login").toggle()
+          $("#logout-button").hide()
+          $("#user").val("")
+          $("#passwd").val("")
       }
 
     }).done(function(data){

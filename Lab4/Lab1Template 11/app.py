@@ -49,7 +49,9 @@ def user():
         rs=querry(sql)
         if len(rs)!=0:
             session['username']=username
-            return jsonify({"username":username})
+            return jsonify({"username":username,"msg":0})
+        else:
+            return jsonify({"msg": 1})
 
         return render_template('index.html')
 
