@@ -91,7 +91,9 @@ def get_r2_data():
 
 
 if __name__ == '__main__':
+
     # 定时任务 ,间隔一天执行
+    scheduler=APScheduler()
     scheduler.add_job(crawl_daily_data,'interval',days=1)
     scheduler.init_app(app=app)
     scheduler.start()
