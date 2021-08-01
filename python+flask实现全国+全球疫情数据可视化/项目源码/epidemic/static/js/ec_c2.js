@@ -21,7 +21,7 @@ var ec_center_option = {
                     color: ['#e0ffff', '#9D3030']
                 },
                 show:true,
-                splitList:[{start:1,end:9},
+                splitList:[{start:0,end:9},
                     {start:10,end:99},
                     {start:100,end:999},
                     {start:1000,end:9999},

@@ -81,7 +81,7 @@ function get_r1_data(){
         url:"/r1",
         timeout:10000,
         success:function (data) {
-            ec_right1_option.xAxis.data=data.keys
+            ec_right1_option.xAxis[0].data=data.keys
             ec_right1_option.series[0].data=data.values
             ec_right1.setOption(ec_right1_option)
         },
@@ -114,4 +114,4 @@ get_l1_data()
 get_l2_data()
 get_r1_data()
 get_r2_data()
-setInterval(gettime,1000)
+// setInterval(gettime,100000)
