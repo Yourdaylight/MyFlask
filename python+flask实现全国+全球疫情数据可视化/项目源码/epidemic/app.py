@@ -1,8 +1,10 @@
+import os
 import time
 
 from flask import Flask
 from flask import jsonify
 from flask import render_template
+from flask_apscheduler import APScheduler
 
 import utils
 
@@ -10,6 +12,15 @@ app = Flask(__name__)
 
 # 工具类，初始化参数为数据库名，数据库表名，数据库账号，数据库密码
 u = utils.utils("myspider", "root", "123456")
+
+
+def crawl_daily_data():
+    """
+    定时任务，每天爬取一次数据
+    :return:
+    """
+    cur_path = os.path.dirname(os.path.abspath(__file__))
+    os.system("python {}".format(os.path.join(cur_path, "spider.py")))
 
 
 @app.route('/')
@@ -71,7 +82,7 @@ def get_r1_data():
 def get_r2_data():
     res = []
     data = u.get_r2_data()
-    for key, value in zip(data.name,data.确诊):
+    for key, value in zip(data.name, data.确诊):
         res.append({"name": key, "value": value})
     # 还需要添加中国的总数据
     china = int(u.get_c1_data()[0])
@@ -80,4 +91,8 @@ def get_r2_data():
 
 
 if __name__ == '__main__':
+    # 定时任务 ,间隔一天执行
+    scheduler.add_job(crawl_daily_data,'interval',days=1)
+    scheduler.init_app(app=app)
+    scheduler.start()
     app.run()
